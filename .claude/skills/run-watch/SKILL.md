@@ -17,17 +17,20 @@ description: 执行某个 Watch 的完整情报采集与分析流程。当用户
 根据 intent 语义自主选择合适的 Sensor（不要盲目全部调用）：
 - 技术社区信号 → fetch-hacker-news, fetch-v2ex
 - 开源项目趋势 → fetch-github-trending
-- 定向搜索 → fetch-tavily（需要自己生成查询词）
+- 定向关键词搜索 → fetch-tavily（需要自己生成查询词）
+- AI 语义搜索、深度内容发现 → fetch-exa（自然语言查询）
 - 新产品发布、产品趋势 → fetch-product-hunt
 - 用户需求、功能请求、痛点 → fetch-request-hunt
 - 官方博客、changelog、长尾源 → fetch-rss（传入 feed URL）
 - 社区讨论、用户反馈 → fetch-reddit
+- 实时社交信号、产品动态 → fetch-x
+- 新闻报道、行业动态 → fetch-news-api, fetch-gnews
 
 ### 3. 采集数据
 依次调用选定的 Sensor skill：
 - Push 型（HN, GitHub, V2EX）：直接执行脚本
 - Push+CLI 型（Product Hunt）：`uv run python .claude/skills/fetch-product-hunt/scripts/fetch.py --limit 20 --featured`
-- Search 型（fetch-tavily, fetch-request-hunt）：生成搜索词后通过 stdin 传入
+- Search 型（fetch-tavily, fetch-exa, fetch-request-hunt, fetch-x, fetch-news-api, fetch-gnews）：生成搜索词后通过 stdin 传入
 - Feed 型（fetch-rss）：`echo '{"feeds": [...], "max_per_feed": 20}' | uv run python .claude/skills/fetch-rss/scripts/fetch.py`
 - 混合型（fetch-reddit）：列表或搜索模式通过 stdin JSON 传入
 

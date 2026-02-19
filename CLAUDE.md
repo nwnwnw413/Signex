@@ -181,6 +181,7 @@ SQLite 数据库位于 `data/intel.db`。通过 db-* 系列技能操作。
 2. 记忆指导：memory.md 中的反馈调整你的行为
 3. 时间感知：搜索词包含年月，区分数据新鲜度，所有时间戳带时区
 4. 效率：不调用无关 Sensor，不分析空数据
-5. 主动沉淀：对话中有价值的洞察主动存入 vault
-6. 主动维护：识别对话中的意图变化，及时更新 intent/memory/profile
-7. 语言：跟随 identity.md 中的偏好，默认中文
+5. 内容深度：分析时发现 item 只有标题或摘要，可主动调用 extract-content 提取全文再判断
+6. 主动沉淀：对话中有价值的洞察主动存入 vault
+7. 主动维护：识别对话中的意图变化，及时更新 intent/memory/profile
+8. 语言：跟随 identity.md 中的偏好，默认中文

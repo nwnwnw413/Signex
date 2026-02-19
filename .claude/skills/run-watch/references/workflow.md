@@ -14,13 +14,16 @@
 | 用户需求、功能请求、痛点挖掘 | fetch-request-hunt |
 | 官方博客、changelog、长尾源 | fetch-rss |
 | 社区讨论、用户反馈、痛点 | fetch-reddit |
+| AI 语义搜索、深度内容发现 | fetch-exa |
+| 实时社交信号、产品发布动态 | fetch-x |
+| 新闻报道、行业动态 | fetch-news-api, fetch-gnews |
 
 **原则**：宁可少调不调多。每个 Sensor 都有成本（时间、API 配额）。
 如果 intent 明确聚焦某个方向，只调相关的 1-2 个 Sensor。
 
-## 搜索词生成（fetch-tavily）
+## 搜索词生成（Search 型 Sensor）
 
-当使用 fetch-tavily 时，需要根据 intent 生成搜索词：
+当使用 Search 型 sensor 时，需要根据 intent 生成搜索词：
 
 1. 提取 intent 中的核心关注点（3-5 个）
 2. 为每个关注点生成 1-2 个搜索查询
@@ -28,18 +31,25 @@
 4. 参考 memory.md 中的排除项，避免搜索已排除的内容
 5. 混合中英文查询以获得更好的覆盖
 
+**Sensor 特性差异：**
+- **fetch-tavily**：关键词+时间搜索，适合精确话题追踪
+- **fetch-exa**：语义相似度搜索，适合自然语言描述（如 "tools that help developers write code faster"），不需要精确关键词
+- **fetch-x**：社交信号搜索，查询词应简短（Twitter 搜索语法），适合追踪产品名、事件。按量计费（~$0.005/条），建议 max_results 10，配合 min_likes 过滤噪音
+- **fetch-news-api / fetch-gnews**：新闻搜索，适合行业动态、公司新闻
+
 示例（ai-coding-tools watch）：
 ```json
-{
-  "queries": [
-    "AI native IDE 2026-02 new release",
-    "Cursor AI IDE update February 2026",
-    "Claude Code 新功能 2026年2月",
-    "AI coding assistant 2026-02 comparison",
-    "AI编程工具 最新动态 2026-02"
-  ],
-  "days": 7
-}
+// fetch-tavily（关键词精确搜索）
+{"queries": ["AI native IDE 2026-02 new release", "Cursor AI IDE update February 2026"], "days": 7}
+
+// fetch-exa（语义搜索，自然语言描述）
+{"queries": ["AI-powered code editors and IDE tools launched recently", "developer tools using LLM for code generation"], "num_results": 10, "days": 7}
+
+// fetch-x（社交信号，简短查询，min_likes 过滤低质量）
+{"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}
+
+// fetch-news-api / fetch-gnews（新闻搜索）
+{"queries": ["AI developer tools", "AI coding assistant"], "days": 7}
 ```
 
 ## Lens 选择决策
@@ -86,10 +96,14 @@
    $ uv run python .claude/skills/fetch-github-trending/scripts/fetch.py
    $ uv run python .claude/skills/fetch-v2ex/scripts/fetch.py
    $ echo '{"queries": [...], "days": 7}' | uv run python .claude/skills/fetch-tavily/scripts/search.py
+   $ echo '{"queries": ["AI native IDE tools", ...], "num_results": 10, "days": 7}' | uv run python .claude/skills/fetch-exa/scripts/search.py
    $ uv run python .claude/skills/fetch-product-hunt/scripts/fetch.py --limit 20 --featured
    $ echo '{"queries": ["AI IDE feature requests"], "limit": 20}' | uv run python .claude/skills/fetch-request-hunt/scripts/search.py
    $ echo '{"feeds": ["https://blog.cursor.com/rss.xml"], "max_per_feed": 20}' | uv run python .claude/skills/fetch-rss/scripts/fetch.py
    $ echo '{"subreddits": ["SaaS", "startups"], "sort": "hot", "limit": 25}' | uv run python .claude/skills/fetch-reddit/scripts/fetch.py
+   $ echo '{"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}' | uv run python .claude/skills/fetch-x/scripts/search.py
+   $ echo '{"queries": ["AI developer tools"], "days": 7}' | uv run python .claude/skills/fetch-news-api/scripts/search.py
+   $ echo '{"queries": ["AI coding tools"], "max_results": 10}' | uv run python .claude/skills/fetch-gnews/scripts/search.py
 
 4. 每个 Sensor 输出通过管道传给 db-save-items 保存
 
