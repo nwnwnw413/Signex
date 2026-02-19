@@ -10,6 +10,10 @@
 | 开源项目、GitHub、技术工具 | fetch-github-trending |
 | 中文社区、国内技术、产品反馈 | fetch-v2ex |
 | 需要定向搜索特定话题 | fetch-tavily |
+| 新产品发布、产品趋势 | fetch-product-hunt |
+| 用户需求、功能请求、痛点挖掘 | fetch-request-hunt |
+| 官方博客、changelog、长尾源 | fetch-rss |
+| 社区讨论、用户反馈、痛点 | fetch-reddit |
 
 **原则**：宁可少调不调多。每个 Sensor 都有成本（时间、API 配额）。
 如果 intent 明确聚焦某个方向，只调相关的 1-2 个 Sensor。
@@ -82,6 +86,10 @@
    $ uv run python .claude/skills/fetch-github-trending/scripts/fetch.py
    $ uv run python .claude/skills/fetch-v2ex/scripts/fetch.py
    $ echo '{"queries": [...], "days": 7}' | uv run python .claude/skills/fetch-tavily/scripts/search.py
+   $ uv run python .claude/skills/fetch-product-hunt/scripts/fetch.py --limit 20 --featured
+   $ echo '{"queries": ["AI IDE feature requests"], "limit": 20}' | uv run python .claude/skills/fetch-request-hunt/scripts/search.py
+   $ echo '{"feeds": ["https://blog.cursor.com/rss.xml"], "max_per_feed": 20}' | uv run python .claude/skills/fetch-rss/scripts/fetch.py
+   $ echo '{"subreddits": ["SaaS", "startups"], "sort": "hot", "limit": 25}' | uv run python .claude/skills/fetch-reddit/scripts/fetch.py
 
 4. 每个 Sensor 输出通过管道传给 db-save-items 保存
 
