@@ -35,6 +35,8 @@ def main():
         sys.exit(1)
 
     items_data = input_data.get("items", [])
+    sensor_success = input_data.get("success", True)
+
     if not items_data:
         print(json.dumps({"success": True, "inserted": 0, "total": 0}, ensure_ascii=False))
         return
@@ -62,6 +64,12 @@ def main():
     db.init()
     try:
         inserted = db.save_items(items)
+
+        # Update source health
+        sources_seen = set(item.source for item in items)
+        for src in sources_seen:
+            db.update_source_health(src, sensor_success)
+
         print(json.dumps({"success": True, "inserted": inserted, "total": len(items)}, ensure_ascii=False))
     finally:
         db.close()

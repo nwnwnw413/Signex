@@ -50,6 +50,7 @@
 3. 每个 Watch 的 `state.json` — 获取 last_run、check_interval、status
 4. 每个 Watch 的 `memory.md` — 获取最近关注焦点和偏好
 5. 今日 `reports/` 和 `alerts/` 目录 — 是否有新产出
+6. 各数据源健康状态（使用 db-source-health）— 是否有源连续失败需要关注
 
 **输出两层内容**：
 

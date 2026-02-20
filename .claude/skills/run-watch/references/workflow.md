@@ -17,6 +17,7 @@
 | AI 语义搜索、深度内容发现 | fetch-exa |
 | 实时社交信号、产品发布动态 | fetch-x |
 | 新闻报道、行业动态 | fetch-news-api, fetch-gnews |
+| 备选/补充网络搜索（独立索引） | fetch-brave-search |
 
 **原则**：宁可少调不调多。每个 Sensor 都有成本（时间、API 配额）。
 如果 intent 明确聚焦某个方向，只调相关的 1-2 个 Sensor。
@@ -35,6 +36,7 @@
 - **fetch-tavily**：关键词+时间搜索，适合精确话题追踪
 - **fetch-exa**：语义相似度搜索，适合自然语言描述（如 "tools that help developers write code faster"），不需要精确关键词
 - **fetch-x**：社交信号搜索，查询词应简短（Twitter 搜索语法），适合追踪产品名、事件。按量计费（~$0.005/条），建议 max_results 10，配合 min_likes 过滤噪音
+- **fetch-brave-search**：备选网络搜索（独立索引，不依赖 Google），$5/1000 requests，建议 count 10，1-2 个 query。仅在 Tavily 不可用或需要交叉验证时使用
 - **fetch-news-api / fetch-gnews**：新闻搜索，适合行业动态、公司新闻
 
 示例（ai-coding-tools watch）：
@@ -47,6 +49,9 @@
 
 // fetch-x（社交信号，简短查询，min_likes 过滤低质量）
 {"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}
+
+// fetch-brave-search（备选搜索，仅在需要交叉验证或 Tavily 不可用时）
+{"queries": ["AI coding tools 2026"], "count": 10}
 
 // fetch-news-api / fetch-gnews（新闻搜索）
 {"queries": ["AI developer tools", "AI coding assistant"], "days": 7}

@@ -60,6 +60,17 @@ class Database:
             )
         """)
 
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS source_health (
+                source TEXT PRIMARY KEY,
+                last_success TEXT,
+                last_failure TEXT,
+                consecutive_failures INTEGER DEFAULT 0,
+                total_calls INTEGER DEFAULT 0,
+                total_failures INTEGER DEFAULT 0
+            )
+        """)
+
         self.connection.commit()
 
     def save_items(self, items: list[SensorItem]) -> int:
@@ -266,6 +277,46 @@ class Database:
             "by_date": by_date,
             "totals": {"runs": total_runs, "total_items": total_items}
         }
+
+    def update_source_health(self, source: str, success: bool) -> None:
+        """Update health tracking for a sensor source."""
+        if not self.connection:
+            raise RuntimeError("Database not initialized. Call init() first.")
+
+        cursor = self.connection.cursor()
+        now = datetime.now(timezone.utc).isoformat()
+
+        cursor.execute("""
+            INSERT INTO source_health (source, last_success, last_failure, consecutive_failures, total_calls, total_failures)
+            VALUES (?, ?, ?, ?, 1, ?)
+            ON CONFLICT(source) DO UPDATE SET
+                last_success = CASE WHEN ? THEN ? ELSE last_success END,
+                last_failure = CASE WHEN ? THEN ? ELSE last_failure END,
+                consecutive_failures = CASE WHEN ? THEN 0 ELSE consecutive_failures + 1 END,
+                total_calls = total_calls + 1,
+                total_failures = CASE WHEN ? THEN total_failures ELSE total_failures + 1 END
+        """, (
+            source,
+            now if success else None,
+            None if success else now,
+            0 if success else 1,
+            0 if success else 1,
+            success, now,
+            not success, now,
+            success,
+            success,
+        ))
+
+        self.connection.commit()
+
+    def get_source_health(self) -> list[dict[str, Any]]:
+        """Get health status for all tracked sources."""
+        if not self.connection:
+            raise RuntimeError("Database not initialized. Call init() first.")
+
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM source_health ORDER BY source")
+        return [dict(row) for row in cursor.fetchall()]
 
     def close(self):
         """Close database connection."""
