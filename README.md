@@ -132,23 +132,23 @@ Sensors fire, data flows into SQLite, the lens analyzes, and you get a report.
 
 ### Sensors (data collection)
 
-| Skill | Source | API Key Required |
-|-------|--------|:---:|
-| `fetch-hacker-news` | Hacker News front page & search | — |
-| `fetch-github-trending` | GitHub Trending repos | — |
-| `fetch-v2ex` | V2EX (Chinese tech community) | — |
-| `fetch-reddit` | Reddit posts & search | — |
-| `fetch-rss` | Any RSS/Atom feed | — |
-| `fetch-tavily` | Tavily web search | Yes |
-| `fetch-brave-search` | Brave Search | Yes |
-| `fetch-exa` | Exa AI semantic search | Yes |
-| `fetch-product-hunt` | Product Hunt launches | Yes |
-| `fetch-request-hunt` | RequestHunt feature requests | Yes |
-| `fetch-news-api` | NewsAPI.org | Yes |
-| `fetch-gnews` | GNews | Yes |
-| `fetch-x` | X / Twitter search | Yes |
-| `fetch-arxiv` | arXiv preprints | — |
-| `fetch-openalex` | OpenAlex academic papers | Yes |
+| Skill | Source | API Key | Get Key |
+|-------|--------|:---:|---------|
+| `fetch-hacker-news` | Hacker News front page & search | — | |
+| `fetch-github-trending` | GitHub Trending repos | — | |
+| `fetch-v2ex` | V2EX (Chinese tech community) | — | |
+| `fetch-reddit` | Reddit posts & search | — | |
+| `fetch-rss` | Any RSS/Atom feed | — | |
+| `fetch-tavily` | Tavily web search | Yes | [tavily.com](https://app.tavily.com/sign-in) |
+| `fetch-brave-search` | Brave Search | Yes | [brave.com](https://brave.com/search/api/) |
+| `fetch-exa` | Exa AI semantic search | Yes | [exa.ai](https://dashboard.exa.ai/login) |
+| `fetch-product-hunt` | Product Hunt launches | Yes | [producthunt.com](https://www.producthunt.com/v2/oauth/applications) |
+| `fetch-request-hunt` | RequestHunt feature requests | Yes | [requesthunt.com](https://www.requesthunt.com) |
+| `fetch-news-api` | NewsAPI.org | Yes | [newsapi.org](https://newsapi.org/register) |
+| `fetch-gnews` | GNews | Yes | [gnews.io](https://gnews.io) |
+| `fetch-x` | X / Twitter search | Yes | [developer.x.com](https://developer.x.com/en/portal/dashboard) |
+| `fetch-arxiv` | arXiv preprints | — | |
+| `fetch-openalex` | OpenAlex academic papers | Yes | [openalex.org](https://openalex.org/settings/api) |
 
 ### Lenses (analysis)
 

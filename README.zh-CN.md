@@ -132,23 +132,23 @@ Signex 根据你的意图创建 Watch，选择合适的 Sensor，准备就绪。
 
 ### Sensor（数据采集）
 
-| Skill | 数据源 | 需要 API Key |
-|-------|--------|:---:|
-| `fetch-hacker-news` | Hacker News 首页 & 搜索 | — |
-| `fetch-github-trending` | GitHub Trending 仓库 | — |
-| `fetch-v2ex` | V2EX 中文技术社区 | — |
-| `fetch-reddit` | Reddit 帖子 & 搜索 | — |
-| `fetch-rss` | 任意 RSS/Atom 源 | — |
-| `fetch-tavily` | Tavily 网络搜索 | 是 |
-| `fetch-brave-search` | Brave Search | 是 |
-| `fetch-exa` | Exa AI 语义搜索 | 是 |
-| `fetch-product-hunt` | Product Hunt 新品发布 | 是 |
-| `fetch-request-hunt` | RequestHunt 功能请求 | 是 |
-| `fetch-news-api` | NewsAPI.org 新闻 | 是 |
-| `fetch-gnews` | GNews 新闻 | 是 |
-| `fetch-x` | X / Twitter 搜索 | 是 |
-| `fetch-arxiv` | arXiv 预印本 | — |
-| `fetch-openalex` | OpenAlex 学术论文 | 是 |
+| Skill | 数据源 | 需要 API Key | 申请地址 |
+|-------|--------|:---:|----------|
+| `fetch-hacker-news` | Hacker News 首页 & 搜索 | — | |
+| `fetch-github-trending` | GitHub Trending 仓库 | — | |
+| `fetch-v2ex` | V2EX 中文技术社区 | — | |
+| `fetch-reddit` | Reddit 帖子 & 搜索 | — | |
+| `fetch-rss` | 任意 RSS/Atom 源 | — | |
+| `fetch-tavily` | Tavily 网络搜索 | 是 | [tavily.com](https://app.tavily.com/sign-in) |
+| `fetch-brave-search` | Brave Search | 是 | [brave.com](https://brave.com/search/api/) |
+| `fetch-exa` | Exa AI 语义搜索 | 是 | [exa.ai](https://dashboard.exa.ai/login) |
+| `fetch-product-hunt` | Product Hunt 新品发布 | 是 | [producthunt.com](https://www.producthunt.com/v2/oauth/applications) |
+| `fetch-request-hunt` | RequestHunt 功能请求 | 是 | [requesthunt.com](https://www.requesthunt.com) |
+| `fetch-news-api` | NewsAPI.org 新闻 | 是 | [newsapi.org](https://newsapi.org/register) |
+| `fetch-gnews` | GNews 新闻 | 是 | [gnews.io](https://gnews.io) |
+| `fetch-x` | X / Twitter 搜索 | 是 | [developer.x.com](https://developer.x.com/en/portal/dashboard) |
+| `fetch-arxiv` | arXiv 预印本 | — | |
+| `fetch-openalex` | OpenAlex 学术论文 | 是 | [openalex.org](https://openalex.org/settings/api) |
 
 ### Lens（分析视角）
 
