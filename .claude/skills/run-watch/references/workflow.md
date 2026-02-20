@@ -18,6 +18,8 @@
 | 实时社交信号、产品发布动态 | fetch-x |
 | 新闻报道、行业动态 | fetch-news-api, fetch-gnews |
 | 备选/补充网络搜索（独立索引） | fetch-brave-search |
+| 学术论文、预印本、前沿研究 | fetch-arxiv |
+| 论文影响力、引用趋势、跨学科学术搜索 | fetch-openalex |
 
 **原则**：宁可少调不调多。每个 Sensor 都有成本（时间、API 配额）。
 如果 intent 明确聚焦某个方向，只调相关的 1-2 个 Sensor。
@@ -38,6 +40,8 @@
 - **fetch-x**：社交信号搜索，查询词应简短（Twitter 搜索语法），适合追踪产品名、事件。按量计费（~$0.005/条），建议 max_results 10，配合 min_likes 过滤噪音
 - **fetch-brave-search**：备选网络搜索（独立索引，不依赖 Google），$5/1000 requests，建议 count 10，1-2 个 query。仅在 Tavily 不可用或需要交叉验证时使用
 - **fetch-news-api / fetch-gnews**：新闻搜索，适合行业动态、公司新闻
+- **fetch-arxiv**：学术预印本搜索，关键词+分类过滤（如 cs.AI, cs.CL），适合追踪特定领域最新论文提交。查询词应偏学术（如 "large language model agent" 而非 "AI coding tools"）
+- **fetch-openalex**：学术论文搜索+引用排序，覆盖 2.5 亿+ 作品，适合发现高引用论文和跨学科关联。支持年份、类型过滤，返回引用数和 FWCI 影响力指标
 
 示例（ai-coding-tools watch）：
 ```json
@@ -55,6 +59,12 @@
 
 // fetch-news-api / fetch-gnews（新闻搜索）
 {"queries": ["AI developer tools", "AI coding assistant"], "days": 7}
+
+// fetch-arxiv（学术预印本，关键词+分类过滤）
+{"queries": ["large language model agent", "code generation LLM"], "categories": ["cs.AI", "cs.CL", "cs.SE"], "max_results": 20}
+
+// fetch-openalex（学术论文搜索，引用排序）
+{"queries": ["LLM agent framework", "AI code generation"], "per_page": 20, "publication_year": "2025-2026"}
 ```
 
 ## Lens 选择决策
@@ -109,6 +119,8 @@
    $ echo '{"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}' | uv run python .claude/skills/fetch-x/scripts/search.py
    $ echo '{"queries": ["AI developer tools"], "days": 7}' | uv run python .claude/skills/fetch-news-api/scripts/search.py
    $ echo '{"queries": ["AI coding tools"], "max_results": 10}' | uv run python .claude/skills/fetch-gnews/scripts/search.py
+   $ echo '{"queries": ["large language model code generation"], "categories": ["cs.AI", "cs.SE"], "max_results": 20}' | uv run python .claude/skills/fetch-arxiv/scripts/search.py
+   $ echo '{"queries": ["LLM code generation"], "per_page": 20, "publication_year": "2025-2026"}' | uv run python .claude/skills/fetch-openalex/scripts/search.py
 
 4. 每个 Sensor 输出通过管道传给 db-save-items 保存
 

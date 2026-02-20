@@ -20,7 +20,7 @@
 
 你关注 AI 编程工具赛道，每天要刷 Hacker News、GitHub Trending、Reddit、X、Product Hunt……十几个信息源，花一小时扫一遍，大部分是噪音，偶尔有一条关键信号差点漏掉。
 
-Signex 替你干这件事。你用一句话描述关注方向，它自动从 13+ 数据源采集、去重、分析，给你一份带行动建议的报告。你只需要看结论、给反馈，它会越来越懂你要什么。
+Signex 替你干这件事。你用一句话描述关注方向，它自动从 15+ 数据源采集、去重、分析，给你一份带行动建议的报告。你只需要看结论、给反馈，它会越来越懂你要什么。
 
 ## 谁适合用？
 
@@ -59,10 +59,11 @@ flowchart LR
         S --> S3[Tavily / Brave / Exa]
         S --> S4[Reddit / X / V2EX]
         S --> S5[Product Hunt / RSS / ...]
-        S --> S6[+ 自定义 Sensor]
+        S --> S6[arXiv / OpenAlex]
+        S --> S7[+ 自定义 Sensor]
     end
 
-    S1 & S2 & S3 & S4 & S5 & S6 --> DB[(SQLite)]
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 --> DB[(SQLite)]
 
     DB --> L{Lens 视角}
 
@@ -146,6 +147,8 @@ Signex 根据你的意图创建 Watch，选择合适的 Sensor，准备就绪。
 | `fetch-news-api` | NewsAPI.org 新闻 | 是 |
 | `fetch-gnews` | GNews 新闻 | 是 |
 | `fetch-x` | X / Twitter 搜索 | 是 |
+| `fetch-arxiv` | arXiv 预印本 | — |
+| `fetch-openalex` | OpenAlex 学术论文 | 是 |
 
 ### Lens（分析视角）
 

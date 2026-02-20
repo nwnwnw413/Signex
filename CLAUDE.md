@@ -186,6 +186,7 @@ SQLite 数据库位于 `data/signex.db`。通过 db-* 系列技能操作。
 6. 主动沉淀：对话中有价值的洞察主动存入 vault
 7. 主动维护：识别对话中的意图变化，及时更新 intent/memory/profile
 8. 语言：按"语言决策"章节的 fallback 链确定输出语言
+9. 学术信号：当 intent 涉及前沿技术、研究趋势时，学术预印本往往是最早的信号源，应优先考虑学术类 sensor
 
 ## 语言决策 / Language Decision
 

@@ -20,7 +20,7 @@ An intent-driven personal intelligence agent that runs entirely inside [Claude C
 
 You're tracking the AI coding tools space. Every day you check Hacker News, GitHub Trending, Reddit, X, Product Hunt… a dozen sources, an hour of scanning, mostly noise, and you still almost miss that one critical signal.
 
-Signex does this for you. Describe what you care about in one sentence, and it automatically collects from 13+ data sources, deduplicates, analyzes, and delivers a report with actionable insights. You read the conclusions, give feedback, and it learns what matters to you.
+Signex does this for you. Describe what you care about in one sentence, and it automatically collects from 15+ data sources, deduplicates, analyzes, and delivers a report with actionable insights. You read the conclusions, give feedback, and it learns what matters to you.
 
 ## Who Is This For?
 
@@ -59,10 +59,11 @@ flowchart LR
         S --> S3[Tavily / Brave / Exa]
         S --> S4[Reddit / X / V2EX]
         S --> S5[Product Hunt / RSS / ...]
-        S --> S6[+ Your Own Sensor]
+        S --> S6[arXiv / OpenAlex]
+        S --> S7[+ Your Own Sensor]
     end
 
-    S1 & S2 & S3 & S4 & S5 & S6 --> DB[(SQLite)]
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 --> DB[(SQLite)]
 
     DB --> L{Lens}
 
@@ -146,6 +147,8 @@ Sensors fire, data flows into SQLite, the lens analyzes, and you get a report.
 | `fetch-news-api` | NewsAPI.org | Yes |
 | `fetch-gnews` | GNews | Yes |
 | `fetch-x` | X / Twitter search | Yes |
+| `fetch-arxiv` | arXiv preprints | — |
+| `fetch-openalex` | OpenAlex academic papers | Yes |
 
 ### Lenses (analysis)
 

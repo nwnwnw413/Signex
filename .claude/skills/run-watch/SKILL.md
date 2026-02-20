@@ -26,12 +26,14 @@ description: 执行某个 Watch 的完整情报采集与分析流程。当用户
 - 社区讨论、用户反馈 → fetch-reddit
 - 实时社交信号、产品动态 → fetch-x
 - 新闻报道、行业动态 → fetch-news-api, fetch-gnews
+- 学术论文、预印本、前沿研究 → fetch-arxiv
+- 论文影响力、引用趋势、跨学科学术搜索 → fetch-openalex
 
 ### 3. 采集数据
 依次调用选定的 Sensor skill：
 - Push 型（HN, GitHub, V2EX）：直接执行脚本
 - Push+CLI 型（Product Hunt）：`uv run python .claude/skills/fetch-product-hunt/scripts/fetch.py --limit 20 --featured`
-- Search 型（fetch-tavily, fetch-exa, fetch-brave-search, fetch-request-hunt, fetch-x, fetch-news-api, fetch-gnews）：生成搜索词后通过 stdin 传入
+- Search 型（fetch-tavily, fetch-exa, fetch-brave-search, fetch-request-hunt, fetch-x, fetch-news-api, fetch-gnews, fetch-arxiv, fetch-openalex）：生成搜索词后通过 stdin 传入
 - Feed 型（fetch-rss）：`echo '{"feeds": [...], "max_per_feed": 20}' | uv run python .claude/skills/fetch-rss/scripts/fetch.py`
 - 混合型（fetch-reddit）：列表或搜索模式通过 stdin JSON 传入
 
