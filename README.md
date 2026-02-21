@@ -6,7 +6,7 @@
 
 **Signal + Nexus — where signals converge.**
 
-An intent-driven personal intelligence agent that runs entirely inside [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+A personal intelligence agent that runs entirely inside [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg)](https://www.python.org/)
@@ -34,7 +34,7 @@ Signex does this for you. Describe what you care about in one sentence, and it a
 
 ## What is Signex?
 
-Signex is an intent-driven personal intelligence agent. You define what you care about (a "Watch"), and it autonomously collects data from multiple sources, analyzes it through different lenses, and delivers actionable reports. It remembers your feedback and adjusts future analysis accordingly.
+Signex is your AI intelligence analyst. You define what you care about (a "Watch"), and it autonomously collects data from multiple sources, analyzes it through different lenses, and delivers actionable reports. It remembers your feedback and adjusts future analysis accordingly.
 
 Architecturally, **Claude Code IS the runtime.** There is no standalone app, server, or CLI wrapper. The agent's behavior is defined entirely in `CLAUDE.md`, and its capabilities are modular skills in `.claude/skills/`. You interact with it by talking to Claude Code.
 

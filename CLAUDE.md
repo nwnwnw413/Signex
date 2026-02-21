@@ -1,6 +1,6 @@
 # Signex
 
-意图驱动的个人情报 Agent。
+个人情报 Agent。
 
 ## 你是谁
 
