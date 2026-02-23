@@ -94,7 +94,7 @@ flowchart LR
 
 ```bash
 # Clone the repo
-git clone https://github.com/your-username/signex.git
+git clone https://github.com/zhiyuzi/Signex.git
 cd signex
 
 # Install dependencies

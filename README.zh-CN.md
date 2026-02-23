@@ -94,7 +94,7 @@ flowchart LR
 
 ```bash
 # 克隆仓库
-git clone https://github.com/your-username/signex.git
+git clone https://github.com/zhiyuzi/Signex.git
 cd signex
 
 # 安装依赖
