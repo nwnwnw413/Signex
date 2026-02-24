@@ -1,6 +1,6 @@
 ---
 name: fetch-rss
-description: 通用 RSS/Atom 解析器。一个 skill 覆盖任意 feed，Claude 根据 intent/memory 自主决定传入哪些 feed URL。用于监控官方博客、changelog、长尾信息源。无需 API key。
+description: 通用 RSS/Atom 解析器。一个 skill 覆盖任意 feed，Agent 根据 intent/memory 自主决定传入哪些 feed URL。用于监控官方博客、changelog、长尾信息源。无需 API key。
 ---
 
 # fetch-rss

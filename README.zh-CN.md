@@ -6,11 +6,11 @@
 
 **Signal + Nexus — 信号汇聚之处。**
 
-个人情报 Agent，完全运行在 [Claude Code](https://docs.anthropic.com/en/docs/claude-code) 之上。
+个人情报 Agent，面向 **Cursor Agent** 运行。
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg)](https://www.python.org/)
-[![Powered by Claude](https://img.shields.io/badge/Powered%20by-Claude-blueviolet.svg)](https://www.anthropic.com/)
+[![Built for Cursor](https://img.shields.io/badge/Built%20for-Cursor-6E56CF.svg)](https://www.cursor.com/)
 
 </div>
 
@@ -36,7 +36,7 @@ Signex 替你干这件事。你用一句话描述关注方向，它自动从 15+
 
 Signex 是你的 AI 情报分析师。你定义关注方向（Watch），它自主从多个数据源采集信息、用不同视角分析、生成可行动的报告。它会记住你的反馈，下次分析自动调整。
 
-架构上，**Claude Code 就是运行时** — 没有独立的 app、server 或 CLI 包装。Agent 的行为完全由 `CLAUDE.md` 定义，能力以模块化 skill 的形式存放在 `.claude/skills/` 中。你直接和 Claude Code 对话来使用它。
+架构上，运行时就是你编辑器里的编码 Agent（Cursor Agent）— 没有独立的 app、server 或 CLI 包装。Agent 行为由 `AGENTS.md` 定义，能力以模块化 skill 的形式存放在 `.claude/skills/` 中。
 
 ## 核心概念
 
@@ -118,7 +118,7 @@ flowchart TB
 
 - [Python 3.11+](https://www.python.org/)
 - [uv](https://docs.astral.sh/uv/)（Python 包管理器）
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code)（CLI 工具）
+- [Cursor](https://www.cursor.com/)（推荐，Agent 模式）
 
 ### 安装
 
@@ -134,8 +134,7 @@ uv sync
 cp .env.example .env
 # 编辑 .env 填入你的 API 密钥
 
-# 在项目目录启动 Claude Code
-claude
+# 在 Cursor 中打开项目并使用 Agent 模式
 ```
 
 ### 第一次使用
@@ -145,6 +144,8 @@ claude
 ```
 
 首次打招呼时 Signex 会自动初始化 — 创建用户画像、Watch 模板和沉淀库。然后给你一份态势简报。
+
+> Cursor 提示：如果你的 Agent 运行时不支持 slash command，可直接按 `.claude/commands/init.md` 中的流程执行初始化。
 
 ```
 你：帮我盯一下 AI 编程工具方向 — 新 IDE、agent 功能、社区反应。
@@ -213,8 +214,8 @@ Signex 根据你的意图创建 Watch，选择合适的 Sensor，准备就绪。
 
 ```
 signex/
-├── CLAUDE.md                  # Agent 行为定义（大脑）
-├── .claude/skills/            # 所有 skill（sensor、lens、db、action）
+├── AGENTS.md                  # Agent 行为定义（规范源）
+├── .claude/skills/            # 所有 skill（历史目录名，兼容 Cursor）
 ├── profile/identity.md        # 用户画像
 ├── watches/                   # Watch 定义
 │   ├── index.md               # Watch 索引

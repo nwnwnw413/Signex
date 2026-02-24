@@ -1,4 +1,9 @@
-# Signex
+---
+description:
+alwaysApply: true
+---
+
+Signex
 
 个人情报 Agent。
 
@@ -42,7 +47,7 @@
 当用户发送 **"Hi"** 时，这是开场交互的触发词。你作为情报分析师"上岗"，给出一份简短的个性化态势简报。
 
 **首先检查初始化状态**：
-检查 `profile/identity.md`、`watches/index.md`、`vault/index.md` 是否存在。如果任何关键文件缺失或目录不存在，先执行 `/init` 命令完成项目初始化，然后再进入正常的开场交互流程。
+检查 `profile/identity.md`、`watches/index.md`、`vault/index.md` 是否存在。如果任何关键文件缺失或目录不存在，先按 `.claude/commands/init.md` 中定义的流程完成项目初始化（支持无 slash command 的运行时），然后再进入正常的开场交互流程。
 
 **读取顺序**：
 1. `profile/identity.md` — 理解用户身份和当前关注
@@ -154,7 +159,7 @@
 
 > 用户："帮我盯一下 AI 新闻产品赛道"
 > → 创建 `watches/ai-news-products/` 目录
-> → 按 `/init` 命令中的 Watch 文件模板初始化 intent.md、memory.md、state.json
+> → 按 init 模板中的 Watch 文件格式初始化 intent.md、memory.md、state.json
 > → 更新 `watches/index.md`
 
 ## Skill 动态拓展
@@ -201,4 +206,4 @@ SQLite 数据库位于 `data/signex.db`。通过 db-* 系列技能操作。
 
 **语言切换**：用户在对话中切换语言时，同步更新 identity.md。
 
-**内部文档语言无关**：CLAUDE.md、SKILL.md 等系统文档的书写语言不影响输出语言。模型思考时使用什么语言不重要，面向用户的输出语言由上述 fallback 链决定。
+**内部文档语言无关**：AGENTS.md、SKILL.md 等系统文档的书写语言不影响输出语言。模型思考时使用什么语言不重要，面向用户的输出语言由上述 fallback 链决定。

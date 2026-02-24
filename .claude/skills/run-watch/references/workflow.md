@@ -52,7 +52,7 @@
 {"queries": ["AI-powered code editors and IDE tools launched recently", "developer tools using LLM for code generation"], "num_results": 10, "days": 7}
 
 // fetch-x（社交信号，简短查询，min_likes 过滤低质量）
-{"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}
+{"queries": ["Cursor IDE", "GitHub Copilot"], "max_results": 10, "min_likes": 5}
 
 // fetch-brave-search（备选搜索，仅在需要交叉验证或 Tavily 不可用时）
 {"queries": ["AI coding tools 2026"], "count": 10}
@@ -96,7 +96,7 @@
 用户："运行 ai-coding-tools watch"
 
 1. 读取 watches/ai-coding-tools/intent.md → 关注 AI 编程工具
-   读取 watches/ai-coding-tools/memory.md → 聚焦 Claude Code，排除 Windsurf
+   读取 watches/ai-coding-tools/memory.md → 聚焦 Cursor IDE，排除 Windsurf
    读取 watches/ai-coding-tools/state.json → 上次运行 2026-02-15
    读取 profile/identity.md → 用户偏好中文报告
 
@@ -104,7 +104,7 @@
    - fetch-hacker-news ✅（英语技术社区）
    - fetch-github-trending ✅（开源项目）
    - fetch-v2ex ✅（中文社区）
-   - fetch-tavily ✅（定向搜索 Claude Code 等）
+   - fetch-tavily ✅（定向搜索 Cursor IDE 等）
 
 3. 执行采集：
    $ uv run python .claude/skills/fetch-hacker-news/scripts/fetch.py
@@ -116,7 +116,7 @@
    $ echo '{"queries": ["AI IDE feature requests"], "limit": 20}' | uv run python .claude/skills/fetch-request-hunt/scripts/search.py
    $ echo '{"feeds": ["https://blog.cursor.com/rss.xml"], "max_per_feed": 20}' | uv run python .claude/skills/fetch-rss/scripts/fetch.py
    $ echo '{"subreddits": ["SaaS", "startups"], "sort": "hot", "limit": 25}' | uv run python .claude/skills/fetch-reddit/scripts/fetch.py
-   $ echo '{"queries": ["Cursor IDE", "Claude Code"], "max_results": 10, "min_likes": 5}' | uv run python .claude/skills/fetch-x/scripts/search.py
+   $ echo '{"queries": ["Cursor IDE", "GitHub Copilot"], "max_results": 10, "min_likes": 5}' | uv run python .claude/skills/fetch-x/scripts/search.py
    $ echo '{"queries": ["AI developer tools"], "days": 7}' | uv run python .claude/skills/fetch-news-api/scripts/search.py
    $ echo '{"queries": ["AI coding tools"], "max_results": 10}' | uv run python .claude/skills/fetch-gnews/scripts/search.py
    $ echo '{"queries": ["large language model code generation"], "categories": ["cs.AI", "cs.SE"], "max_results": 20}' | uv run python .claude/skills/fetch-arxiv/scripts/search.py
@@ -130,7 +130,7 @@
 6. 选择 lens（memory 无偏好，默认 deep_insight）
    读取 .claude/skills/lens-deep-insight/ 的分析框架
    对数据进行分析，生成 insights.md
-   识别到 Claude Code 新功能 → 生成 alert
+   识别到 Cursor IDE 新功能 → 生成 alert
 
 7. 保存报告到 reports/2026-02-17/ai-coding-tools/insights.md
    保存 alert 到 alerts/2026-02-17/ai-coding-tools.md
@@ -140,8 +140,8 @@
 9. 更新 state.json 的 last_run
 
 10. 收尾交互：
-    报告中出现了 Claude Code 新功能（高信号），主动提问：
-    "Claude Code 这次更新了 XX 能力，要不要我深入挖一下细节？
+    报告中出现了 Cursor IDE 新功能（高信号），主动提问：
+    "Cursor IDE 这次更新了 XX 能力，要不要我深入挖一下细节？
      或者持续盯着后续社区反馈？"
     用户回复后，根据反馈更新 memory/intent/vault。
     用户说"不用了"→ 正常结束。

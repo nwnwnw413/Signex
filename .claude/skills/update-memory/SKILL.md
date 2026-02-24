@@ -26,7 +26,7 @@ description: 更新 Watch 的 memory.md 文件。当用户对报告或分析给�
 更新后的 memory.md:
 ```
 ### 关注方向
-- 重点聚焦标杆产品Claude Code的相关新功能
+- 重点聚焦标杆产品 Cursor IDE 的相关新功能
 
 ### 排除项
 - 暂不关注Windsurf相关内容

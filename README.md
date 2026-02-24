@@ -6,11 +6,11 @@
 
 **Signal + Nexus — where signals converge.**
 
-A personal intelligence agent that runs entirely inside [Claude Code](https://docs.anthropic.com/en/docs/claude-code).
+A personal intelligence agent built for **Cursor Agent**.
 
 [![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-blue.svg)](LICENSE)
 [![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-3776AB.svg)](https://www.python.org/)
-[![Powered by Claude](https://img.shields.io/badge/Powered%20by-Claude-blueviolet.svg)](https://www.anthropic.com/)
+[![Built for Cursor](https://img.shields.io/badge/Built%20for-Cursor-6E56CF.svg)](https://www.cursor.com/)
 
 </div>
 
@@ -36,7 +36,7 @@ Signex does this for you. Describe what you care about in one sentence, and it a
 
 Signex is your AI intelligence analyst. You define what you care about (a "Watch"), and it autonomously collects data from multiple sources, analyzes it through different lenses, and delivers actionable reports. It remembers your feedback and adjusts future analysis accordingly.
 
-Architecturally, **Claude Code IS the runtime.** There is no standalone app, server, or CLI wrapper. The agent's behavior is defined entirely in `CLAUDE.md`, and its capabilities are modular skills in `.claude/skills/`. You interact with it by talking to Claude Code.
+Architecturally, the runtime is the coding agent in your editor (Cursor Agent). There is no standalone app, server, or CLI wrapper. The agent's behavior is defined in `AGENTS.md`, and capabilities are modular skills in `.claude/skills/`.
 
 ## Core Concepts
 
@@ -118,7 +118,7 @@ flowchart TB
 
 - [Python 3.11+](https://www.python.org/)
 - [uv](https://docs.astral.sh/uv/) (Python package manager)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (the CLI)
+- [Cursor](https://www.cursor.com/) (recommended, Agent mode)
 
 ### Setup
 
@@ -134,8 +134,7 @@ uv sync
 cp .env.example .env
 # Edit .env with your API keys
 
-# Start Claude Code in the project directory
-claude
+# Open the project in Cursor and start Agent mode
 ```
 
 ### First Run
@@ -145,6 +144,8 @@ You:  Hi
 ```
 
 Signex initializes automatically on first greeting — creates your profile, watch templates, and vault. Then it gives you a situational briefing.
+
+> Cursor note: if your agent runtime does not support slash commands, it should execute the initialization workflow from `.claude/commands/init.md` directly.
 
 ```
 You:  Help me watch AI coding tools — new IDEs, agent features, community reactions.
@@ -213,8 +214,8 @@ Sensors fire, data flows into SQLite, the lens analyzes, and you get a report.
 
 ```
 signex/
-├── CLAUDE.md                  # Agent behavior definition (the brain)
-├── .claude/skills/            # All skills (sensor, lens, db, action)
+├── AGENTS.md                  # Canonical agent behavior definition
+├── .claude/skills/            # All skills (legacy folder name, Cursor-compatible)
 ├── profile/identity.md        # User identity & preferences
 ├── watches/                   # Watch definitions
 │   ├── index.md               # Watch registry
